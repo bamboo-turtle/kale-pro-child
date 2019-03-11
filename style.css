@@ -4,3 +4,21 @@
  Version:      1.0.0
  Text Domain:  kale-pro-child
 */
+
+/* Fix from Lyrathemes for WC category page displaying subcategories */
+.archive .term-description {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tax-product_cat .kale-products .product-category {
+    display: inline-block;
+    width: 18%;
+    vertical-align: middle;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.tax-product_cat .kale-products .product-category img {
+    width: 200px;
+}
