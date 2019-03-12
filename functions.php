@@ -68,4 +68,15 @@ function zero_waste_woocommerce_quantity_input_args( $args, $product ) {
 }
 
 add_filter( 'woocommerce_quantity_input_args', 'zero_waste_woocommerce_quantity_input_args', 10, 2 ); 
+
+// Add units next to the quantity field
+function zero_waster_after_add_to_cart_quantity() {
+  global $product;
+  $display_price_quantity = $product->get_attribute('display_price_quantity');
+  if ($display_price_quantity && $display_price_quantity > 1) {
+    echo "<div class='units'>grams</div>";
+  }
+}
+
+add_action( 'woocommerce_after_add_to_cart_quantity', 'zero_waster_after_add_to_cart_quantity', 10, 0);
 ?>

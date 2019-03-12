@@ -22,3 +22,11 @@
 .tax-product_cat .kale-products .product-category img {
     width: 200px;
 }
+
+/* Units next to quantity field on single product page */
+.single-product div.product form.cart .units {
+  float: left;
+  margin: 0 8px 0 -10px;
+  line-height: 55px;
+  font-size: 16px;
+}
