@@ -23,6 +23,25 @@
     width: 200px;
 }
 
+@media (max-width: 767px) {
+  .post-type-archive-product .kale-products > li.product-category.product,
+  .tax-product_cat .kale-products .product-category {
+      width: 33.33%;
+  }
+  h2.woocommerce-loop-category__title {
+    line-height: 27px;
+  }
+}
+
+@media (max-width: 560px) {
+  .post-type-archive-product .kale-products > li.product-category.product {
+      width: 50%;
+  }
+  .tax-product_cat .kale-products .product-category {
+      width: 50%;
+  }
+}
+
 /* Units next to quantity field on single product page */
 .single-product div.product form.cart .units {
   float: left;
@@ -30,3 +49,4 @@
   line-height: 55px;
   font-size: 16px;
 }
+
