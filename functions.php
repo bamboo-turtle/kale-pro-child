@@ -5,6 +5,13 @@ function kale_child_enqueue_styles() {
     $parent_style = 'kale-style';
     $deps = array('bootstrap', 'bootstrap-select', 'font-awesome', 'owl-carousel');
     wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' , $deps);
+    wp_enqueue_style( 'kale-print', get_template_directory_uri() . '/print.css', array( 'kale-style' ), '', 'print' );
+    wp_style_add_data( 'kale-style', 'rtl', 'replace' );
+
+    if ( class_exists( 'WooCommerce' ) ) {
+        wp_enqueue_style('slick-style', get_template_directory_uri().'/assets/css/slick.min.css' );
+        wp_enqueue_style('kale-woocommerce-style', get_template_directory_uri().'/woocommerce/woocommerce.css', array( 'kale-style' ) );
+    }
     
     wp_enqueue_style( 'kale-style-child', get_stylesheet_directory_uri() . '/style.css', array( $parent_style ), wp_get_theme()->get('Version') );
 }
