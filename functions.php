@@ -27,4 +27,45 @@ function kale_get_option($key){
         $value = get_theme_mod($key, $kale_defaults[$key]); 
     return $value;
 }
+
+function zero_waste_modify_product_price($product, $price_html) {
+  $display_price_quantity = $product->get_attribute('display_price_quantity');
+  if ($display_price_quantity && $display_price_quantity > 1) {
+    if ($product->get_type() == 'simple' && $product->get_price() != '' && !$product->is_on_sale()) {
+      $price_html = wc_price( wc_get_price_to_display( $product ) * $display_price_quantity );
+      $price_html .= ' <small class="woocommerce-price-suffix">per '. $display_price_quantity . 'g</small>';
+    }
+  }
+  return $price_html;
+}
+
+// Modify price of products sold by weight on product page
+function zero_waste_woocommerce_get_price_html($price_html, $product) {
+  return zero_waste_modify_product_price($product, $price_html);
+}
+
+add_filter( 'woocommerce_get_price_html', 'zero_waste_woocommerce_get_price_html', 10, 2 );
+
+// Modify price of products sold by weight on cart page
+function zero_waste_woocommerce_cart_item_price($price_html, $cart_item, $cart_item_key) {
+  $product = wc_get_product($cart_item['product_id']);
+  return zero_waste_modify_product_price($product, $price_html);
+}
+
+add_filter( 'woocommerce_cart_item_price', 'zero_waste_woocommerce_cart_item_price', 10, 3 );
+
+// Customise quantity selector
+function zero_waste_woocommerce_quantity_input_args( $args, $product ) {
+  $display_price_quantity = $product->get_attribute('display_price_quantity');
+  if ($display_price_quantity && $display_price_quantity > 1) {
+    if ( is_singular( 'product' ) ) {
+      $args['input_value'] 	= 50;	// Starting value (we only want to affect product pages, not cart)
+    }
+    $args['min_value'] = 50;   	// Minimum value
+    $args['step'] = 50;    // Quantity steps
+  }
+	return $args;
+}
+
+add_filter( 'woocommerce_quantity_input_args', 'zero_waste_woocommerce_quantity_input_args', 10, 2 ); 
 ?>
