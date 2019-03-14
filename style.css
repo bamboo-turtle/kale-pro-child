@@ -42,6 +42,21 @@
   }
 }
 
+/* Fix issue with related products element for products w/o description */
+.single-product div.product .related.products {
+  clear: both;
+}
+
+/* Fix shipping info on the cart page */
+.cart_totals .woocommerce-shipping-totals {
+  display: none;
+}
+
+/* Fix shipping info on the checkout page */
+#order_review .woocommerce-shipping-totals {
+  display: none;
+}
+
 /* Units next to quantity field on single product page */
 .single-product div.product form.cart .units {
   float: left;
